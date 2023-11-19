@@ -1,3 +1,4 @@
+import { Debt } from 'src/debt/debt.entity';
 import {
   Entity,
   Column,
@@ -5,6 +6,7 @@ import {
   AfterUpdate,
   AfterRemove,
   PrimaryGeneratedColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -17,6 +19,9 @@ export class User {
 
   @Column()
   password: string;
+
+  @OneToMany(() => Debt, (debt) => debt.user)
+  debts: Debt[]; // One user can have many debts
 
   @AfterInsert()
   logInsert() {
