@@ -4,7 +4,7 @@ import { UserDto } from './dtos/user.dts';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './user.entity';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dtos/create-user-.dto';
+import { CreateUserDto } from './dtos/create-user.dto';
 import { AuthService } from 'src/auth/auth.service';
 
 @Serialize(UserDto)

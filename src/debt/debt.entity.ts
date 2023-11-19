@@ -12,19 +12,22 @@ export class Debt {
   @Column()
   type: string;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column()
   totalAmount: number;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column()
   currentBalance: number;
 
-  @Column('decimal', { precision: 5, scale: 2, nullable: true, default: 12 })
+  @Column({ default: 12 })
   apr: number;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column()
   monthlyPayment: number;
 
-  @Column('date')
+  @Column('date', { nullable: true })
+  nextDueDate: Date;
+
+  @Column('date', { default: () => 'CURRENT_DATE' })
   startDate: Date;
 
   @Column({ type: 'date', nullable: true })
