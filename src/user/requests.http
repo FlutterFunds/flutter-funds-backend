@@ -1,0 +1,23 @@
+### Create New User
+
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+  "email": "mtrew1@test.com",
+  "password": "test123"
+}
+
+
+### Sign In User 
+
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+  "email": "mtrew1@test.com", 
+  "password": "test123"
+}
+
+### Log Out User
+POST http://localhost:3000/auth/signout
