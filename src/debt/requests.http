@@ -11,6 +11,19 @@ content-type: application/json
   "nextDueDate": "2023-01-15"
 }
 
+### Update Debt
+PUT http://localhost:3000/debts/1
+content-type: application/json
+
+{
+  "type": "credit",
+  "totalAmount": "2500",
+  "currentBalance": "2500",
+  "apr": "0.12",
+  "monthlyPayment": "250",
+  "nextDueDate": "2023-02-15"
+}
+
 ### Get all debts for a user
 GET http://localhost:3000/debts
 
