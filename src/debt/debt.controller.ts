@@ -18,6 +18,7 @@ import { DebtDto } from './dtos/debt.dto';
 
 @Controller('debts')
 @UseGuards(AuthGuard)
+@Serialize(DebtDto)
 export class DebtController {
   constructor(private readonly debtService: DebtService) {}
 
@@ -35,10 +36,10 @@ export class DebtController {
     return this.debtService.findAllDebts(user.id);
   }
 
-  // @Get(':id')
-  // async findOne(@Param('id') id: string) {
-  //   return this.debtService.findOne(+id);
-  // }
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    return this.debtService.findOneDebt(+id);
+  }
 
   // @Put(':id')
   // async update(@Param('id') id: string, @Body() updateDebtDto: UpdateDebtDto) {

@@ -13,3 +13,6 @@ content-type: application/json
 
 ### Get all debts for a user
 GET http://localhost:3000/debts
+
+### Get a debt by id
+GET http://localhost:3000/debts/1

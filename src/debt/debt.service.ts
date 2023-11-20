@@ -31,9 +31,12 @@ export class DebtService {
     });
   }
 
-  // async findOneDebt(id: number): Promise<Debt> {
-  //   return this.debtRepository.findOne(id);
-  // }
+  async findOneDebt(id: number): Promise<Debt> {
+    return this.debtRepository.findOne({
+      where: { id },
+      relations: ['user'],
+    });
+  }
 
   // async updateDebt(id: number, updateDebtDto: any): Promise<Debt> {
   //   await this.debtRepository.update(id, updateDebtDto);
