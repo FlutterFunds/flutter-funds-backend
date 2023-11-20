@@ -22,9 +22,14 @@ export class DebtService {
     return this.debtRepository.save(debt);
   }
 
-  // async findAllDebts(): Promise<Debt[]> {
-  //   return this.debtRepository.find();
-  // }
+  async findAllDebts(userId: number): Promise<Debt[]> {
+    // find all debts where the user id matches the user id passed in
+    return this.debtRepository.find({
+      where: { user: { id: userId } },
+      order: { totalAmount: 'ASC' },
+      relations: ['user'],
+    });
+  }
 
   // async findOneDebt(id: number): Promise<Debt> {
   //   return this.debtRepository.findOne(id);

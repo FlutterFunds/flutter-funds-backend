@@ -3,10 +3,13 @@ POST http://localhost:3000/debts
 content-type: application/json
 
 {
-  "type": "auto",
-  "totalAmount": "25000.01",
-  "currentBalance": "2500.01",
-  "apr": "0.05",
-  "monthlyPayment": "525.00",
-  "nextDueDate": "2023-02-05"
+  "type": "credit",
+  "totalAmount": "500",
+  "currentBalance": "500",
+  "apr": "0.10",
+  "monthlyPayment": "200",
+  "nextDueDate": "2023-01-15"
 }
+
+### Get all debts for a user
+GET http://localhost:3000/debts

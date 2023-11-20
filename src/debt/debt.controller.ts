@@ -13,13 +13,15 @@ import { CreateDebtDto } from './dtos/create-debt-dto';
 import { CurrentUser } from 'src/user/decorators/current-user.decorator';
 import { User } from 'src/user/user.entity';
 import { AuthGuard } from 'src/guards/auth.guard';
+import { Serialize } from 'src/interceptors/serializeInterceptor';
+import { DebtDto } from './dtos/debt.dto';
 
 @Controller('debts')
+@UseGuards(AuthGuard)
 export class DebtController {
-  constructor(private readonly debtService: DebtService) { }
+  constructor(private readonly debtService: DebtService) {}
 
   @Post()
-  @UseGuards(AuthGuard)
   async create(
     @Body() createDebtDto: CreateDebtDto,
     @CurrentUser() user: User,
@@ -27,10 +29,11 @@ export class DebtController {
     return this.debtService.createDebt(createDebtDto, user.id);
   }
 
-  // @Get()
-  // async findAll() {
-  //   return this.debtService.findAll();
-  // }
+  @Get()
+  @Serialize(DebtDto)
+  async findAllDebts(@CurrentUser() user: User) {
+    return this.debtService.findAllDebts(user.id);
+  }
 
   // @Get(':id')
   // async findOne(@Param('id') id: string) {
