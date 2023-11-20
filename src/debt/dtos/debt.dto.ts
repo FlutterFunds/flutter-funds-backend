@@ -8,16 +8,16 @@ export class DebtDto {
   type: string;
 
   @Expose()
-  totalAmount: number;
+  totalAmount: string;
 
   @Expose()
-  currentBalance: number;
+  currentBalance: string;
 
   @Expose()
-  apr: number;
+  apr: string;
 
   @Expose()
-  monthlyPayment: number;
+  monthlyPayment: string;
 
   @Expose()
   nextDueDate: Date | null;

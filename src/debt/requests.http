@@ -6,8 +6,8 @@ content-type: application/json
   "type": "credit",
   "totalAmount": "500",
   "currentBalance": "500",
-  "apr": "0.10",
-  "monthlyPayment": "200",
+  "apr": ".125",
+  "monthlyPayment": "200.25",
   "nextDueDate": "2023-01-15"
 }
 

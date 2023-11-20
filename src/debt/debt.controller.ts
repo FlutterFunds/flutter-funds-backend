@@ -32,7 +32,6 @@ export class DebtController {
   }
 
   @Get()
-  @Serialize(DebtDto)
   async findAllDebts(@CurrentUser() user: User) {
     return this.debtService.findAllDebts(user.id);
   }

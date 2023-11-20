@@ -9,7 +9,7 @@ export class DebtService {
   constructor(
     @InjectRepository(Debt)
     private debtRepository: Repository<Debt>,
-  ) { }
+  ) {}
 
   async createDebt(
     createDebtDto: CreateDebtDto,

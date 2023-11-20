@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 import { User } from '../user/user.entity'; // Assuming you have a User entity
+import { Payment } from 'src/payment/payment.entity';
 
 @Entity()
 export class Debt {
@@ -12,17 +13,17 @@ export class Debt {
   @Column()
   type: string;
 
-  @Column()
-  totalAmount: number;
+  @Column('decimal', { precision: 10, scale: 2 })
+  totalAmount: string;
 
-  @Column()
-  currentBalance: number;
+  @Column('decimal', { precision: 10, scale: 2 })
+  currentBalance: string;
 
-  @Column({ default: 12 })
-  apr: number;
+  @Column('decimal', { precision: 5, scale: 2, nullable: true, default: '.12' })
+  apr: string;
 
-  @Column()
-  monthlyPayment: number;
+  @Column('decimal', { precision: 10, scale: 2 })
+  monthlyPayment: string;
 
   @Column('date', { nullable: true })
   nextDueDate: Date;
@@ -35,4 +36,7 @@ export class Debt {
 
   @Column({ type: 'date', nullable: true })
   deletedAt: Date | null;
+
+  @OneToMany(() => Payment, (payment) => payment.debt)
+  payments: Payment[];
 }

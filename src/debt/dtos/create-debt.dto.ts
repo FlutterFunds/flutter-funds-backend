@@ -5,18 +5,18 @@ export class CreateDebtDto {
   type: string;
 
   @IsDecimal()
-  totalAmount: number;
+  totalAmount: string;
 
   @IsDecimal()
-  currentBalance: number;
-
-  @IsDecimal()
-  @IsOptional()
-  apr: number;
+  currentBalance: string;
 
   @IsDecimal()
   @IsOptional()
-  monthlyPayment: number;
+  apr: string;
+
+  @IsDecimal()
+  @IsOptional()
+  monthlyPayment: string;
 
   @IsDateString()
   @IsOptional()

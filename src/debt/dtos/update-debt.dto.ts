@@ -8,22 +8,22 @@ export class UpdateDebtDto {
 
   @IsOptional()
   @IsDecimal({ decimal_digits: '2' })
-  totalAmount?: number;
+  totalAmount?: string;
 
   @IsOptional()
   @IsDecimal({ decimal_digits: '2' })
-  currentBalance?: number;
+  currentBalance?: string;
 
   @IsOptional()
   @IsDecimal(
     { decimal_digits: '2', force_decimal: true },
     { message: 'APR must be a valid decimal number.' },
   )
-  apr?: number;
+  apr?: string;
 
   @IsOptional()
   @IsDecimal({ decimal_digits: '2' })
-  monthlyPayment?: number;
+  monthlyPayment?: string;
 
   @IsOptional()
   @IsDate()
