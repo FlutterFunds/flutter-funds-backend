@@ -31,4 +31,7 @@ export class DebtDto {
   @Transform(({ obj }) => obj.user.id)
   @Expose()
   userId: number;
+
+  @Expose()
+  deletedAt: Date | null;
 }

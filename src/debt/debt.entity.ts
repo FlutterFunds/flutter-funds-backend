@@ -32,4 +32,7 @@ export class Debt {
 
   @Column({ type: 'date', nullable: true })
   endDate: Date | null;
+
+  @Column({ type: 'date', nullable: true })
+  deletedAt: Date | null;
 }

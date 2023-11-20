@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 import { Debt } from './debt.entity';
-import { CreateDebtDto } from './dtos/create-debt-dto';
+import { CreateDebtDto } from './dtos/create-debt.dto';
 
 @Injectable()
 export class DebtService {
   constructor(
     @InjectRepository(Debt)
     private debtRepository: Repository<Debt>,
-  ) {}
+  ) { }
 
   async createDebt(
     createDebtDto: CreateDebtDto,
@@ -25,7 +25,7 @@ export class DebtService {
   async findAllDebts(userId: number): Promise<Debt[]> {
     // find all debts where the user id matches the user id passed in
     return this.debtRepository.find({
-      where: { user: { id: userId } },
+      where: { user: { id: userId }, deletedAt: IsNull() },
       order: { totalAmount: 'ASC' },
       relations: ['user'],
     });
@@ -38,12 +38,30 @@ export class DebtService {
     });
   }
 
-  // async updateDebt(id: number, updateDebtDto: any): Promise<Debt> {
-  //   await this.debtRepository.update(id, updateDebtDto);
-  //   return this.debtRepository.findOne(id);
-  // }
+  async updateDebt(id: number, updateDebtDto: any): Promise<Debt> {
+    const debt: Debt = await this.findOneDebt(id);
+    if (!debt) {
+      throw new Error('Debt not found');
+    }
+    Object.assign(debt, updateDebtDto);
+    return this.debtRepository.save(debt);
+  }
 
-  // async deleteDebt(id: number): Promise<void> {
-  //   await this.debtRepository.delete(id);
-  // }
+  async softDeleteDebt(id: number): Promise<Debt> {
+    const debt = await this.findOneDebt(id);
+    if (!debt) {
+      throw new Error('Debt not found');
+    }
+    debt.deletedAt = new Date();
+    return this.debtRepository.save(debt);
+  }
+
+  async restoreDebt(id: number): Promise<Debt> {
+    const debt = await this.findOneDebt(id);
+    if (!debt) {
+      throw new Error('Debt not found');
+    }
+    debt.deletedAt = null;
+    return this.debtRepository.save(debt);
+  }
 }

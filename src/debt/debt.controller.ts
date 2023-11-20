@@ -9,18 +9,19 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { DebtService } from './debt.service';
-import { CreateDebtDto } from './dtos/create-debt-dto';
+import { CreateDebtDto } from './dtos/create-debt.dto';
 import { CurrentUser } from 'src/user/decorators/current-user.decorator';
 import { User } from 'src/user/user.entity';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { Serialize } from 'src/interceptors/serializeInterceptor';
 import { DebtDto } from './dtos/debt.dto';
+import { UpdateDebtDto } from './dtos/update-debt.dto';
 
 @Controller('debts')
 @UseGuards(AuthGuard)
 @Serialize(DebtDto)
 export class DebtController {
-  constructor(private readonly debtService: DebtService) {}
+  constructor(private readonly debtService: DebtService) { }
 
   @Post()
   async create(
@@ -41,13 +42,18 @@ export class DebtController {
     return this.debtService.findOneDebt(+id);
   }
 
-  // @Put(':id')
-  // async update(@Param('id') id: string, @Body() updateDebtDto: UpdateDebtDto) {
-  //   return this.debtService.update(+id, updateDebtDto);
-  // }
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() updateDebtDto: UpdateDebtDto) {
+    return this.debtService.updateDebt(+id, updateDebtDto);
+  }
 
-  // @Delete(':id')
-  // async remove(@Param('id') id: string) {
-  //   return this.debtService.remove(+id);
-  // }
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return this.debtService.softDeleteDebt(+id);
+  }
+
+  @Post(':id/restore')
+  async restore(@Param('id') id: string) {
+    return this.debtService.restoreDebt(+id);
+  }
 }

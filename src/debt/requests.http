@@ -16,3 +16,9 @@ GET http://localhost:3000/debts
 
 ### Get a debt by id
 GET http://localhost:3000/debts/1
+
+### Soft Delete a debt 
+DELETE http://localhost:3000/debts/1
+
+### Restore a debt 
+POST http://localhost:3000/debts/1/restore
