@@ -1,4 +1,5 @@
 import { Expose, Transform } from 'class-transformer';
+import { PaymentDto } from 'src/payment/dtos/payment.dto';
 
 export class DebtDto {
   @Expose()
@@ -31,6 +32,10 @@ export class DebtDto {
   @Transform(({ obj }) => obj.user.id)
   @Expose()
   userId: number;
+
+  @Transform(({ obj }) => obj.payments)
+  @Expose()
+  payments: PaymentDto[];
 
   @Expose()
   deletedAt: Date | null;

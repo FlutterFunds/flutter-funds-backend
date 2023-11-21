@@ -1,0 +1,9 @@
+### Create New Payment 
+POST http://localhost:3000/payments
+Content-Type: application/json
+
+{
+    "debtId": 1,
+    "amount": "100",
+    "paymentDate": "2023-11-15"
+}

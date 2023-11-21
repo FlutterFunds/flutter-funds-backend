@@ -27,7 +27,7 @@ export class DebtService {
     return this.debtRepository.find({
       where: { user: { id: userId }, deletedAt: IsNull() },
       order: { totalAmount: 'ASC' },
-      relations: ['user'],
+      relations: ['user', 'payments'],
     });
   }
 
