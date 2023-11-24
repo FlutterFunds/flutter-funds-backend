@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Payment } from './payment.entity';
 import { Repository } from 'typeorm';
 import { DebtService } from 'src/debt/debt.service';
 import { CreatePaymentDto } from './dtos/create-payment.dto';
+import { UpdatePaymentDto } from './dtos/update-payment.dto';
 
 @Injectable()
 export class PaymentService {
@@ -21,6 +22,22 @@ export class PaymentService {
       ...createPaymentDto,
       debt,
     });
+    return this.paymentRepository.save(payment);
+  }
+
+  async updatePayment(
+    id: number,
+    updatePaymentDto: UpdatePaymentDto,
+  ): Promise<Payment> {
+    const payment = await this.paymentRepository.findOne({ where: { id } });
+
+    if (!payment) {
+      throw new NotFoundException(`Payment with ID ${id} not found`);
+    }
+
+    // Update the payment details
+    Object.assign(payment, updatePaymentDto);
+
     return this.paymentRepository.save(payment);
   }
 }

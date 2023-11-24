@@ -7,3 +7,13 @@ Content-Type: application/json
     "amount": "100",
     "paymentDate": "2023-11-15"
 }
+
+### Update Payment
+PUT http://localhost:3000/payments/2
+Content-Type: application/json
+
+{
+    "debtId": 1,
+    "amount": "150",
+    "paymentDate": "2023-12-15"
+}
