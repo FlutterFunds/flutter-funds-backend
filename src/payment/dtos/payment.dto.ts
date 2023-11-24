@@ -11,9 +11,6 @@ export class PaymentDto {
   @Expose()
   paymentDate: Date;
 
-  @Expose()
-  status: string;
-
   @Transform(({ obj }) => obj.debt)
   @Expose()
   debt: DebtDto;

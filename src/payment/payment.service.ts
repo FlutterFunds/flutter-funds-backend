@@ -29,12 +29,18 @@ export class PaymentService {
     id: number,
     updatePaymentDto: UpdatePaymentDto,
   ): Promise<Payment> {
-    const payment = await this.paymentRepository.findOne({ where: { id } });
+    const payment = await this.paymentRepository.findOne({
+      where: { id },
+      relations: ['debt'],
+    });
 
     if (!payment) {
       throw new NotFoundException(`Payment with ID ${id} not found`);
     }
-
+    const debt = payment?.debt;
+    if (!debt) {
+      throw new Error('Debt not found');
+    }
     // Update the payment details
     Object.assign(payment, updatePaymentDto);
 
